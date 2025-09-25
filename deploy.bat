@@ -30,6 +30,13 @@ copy "%LOCAL_LIB%\%JAR%" "%TOMCAT_WEBAPPS%\%APP_NAME%\WEB-INF\lib\"
 rem Copie la bibliothèque Jakarta
 copy "%LOCAL_LIB%\jakarta.servlet-api-6.0.0.jar" "%TOMCAT_WEBAPPS%\%APP_NAME%\WEB-INF\lib\"
 
+rem Copie tous les fichiers JSP
+echo Copie des fichiers JSP...
+for %%f in ("..\Test\Webapp\*.jsp") do (
+    echo Copie de %%f
+    copy "%%f" "%TOMCAT_WEBAPPS%\%APP_NAME%\"
+)
+
 rem Nettoyage
 del src\FrontServlet.class
 rmdir /s /q framework
