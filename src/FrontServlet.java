@@ -6,7 +6,6 @@ import jakarta.servlet.http.*;
 
 public class FrontServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -27,6 +26,7 @@ public class FrontServlet extends HttpServlet {
         String path = uri.substring(contextPath.length());
         
         resp.setContentType("text/plain");
+        
         PrintWriter out = resp.getWriter();
         out.println("Url demande : " + uri);
     }
