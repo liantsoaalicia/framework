@@ -6,6 +6,13 @@ import jakarta.servlet.http.*;
 
 public class FrontServlet extends HttpServlet {
 
+    private RequestDispatcher defaultDispatcher;
+
+    @Override
+    public void init() {
+        defaultDispatcher = getServletContext().getNamedDispatcher("default");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -25,9 +32,16 @@ public class FrontServlet extends HttpServlet {
         String contextPath = req.getContextPath();
         String path = uri.substring(contextPath.length());
         
-        resp.setContentType("text/plain");
+        boolean resourceExists = getServletContext().getResource(path) != null;
         
-        PrintWriter out = resp.getWriter();
-        out.println("Url demande : " + uri);
+        if (resourceExists) {
+            defaultDispatcher.forward(req, resp);
+        } else {
+            resp.setContentType("text/plain");
+            PrintWriter out = resp.getWriter();
+            out.println("Url demande : " + uri);
+        }
     }
+
+
 }
