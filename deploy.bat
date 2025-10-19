@@ -37,6 +37,13 @@ for %%f in ("..\Test\Webapp\*.jsp") do (
     copy "%%f" "%TOMCAT_WEBAPPS%\%APP_NAME%\"
 )
 
+rem Copie tous les fichiers HTML
+echo Copie des fichiers HTML...
+for %%f in ("..\Test\Webapp\*.html") do (
+    echo Copie de %%f
+    copy "%%f" "%TOMCAT_WEBAPPS%\%APP_NAME%\"
+)
+
 rem Nettoyage
 del src\FrontServlet.class
 rmdir /s /q framework
